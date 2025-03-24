@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index Coding Example</title>
+</head>
+<body>
+    <h2>Index Coding Demo</h2>
+    <button onclick="performIndexCoding()">Perform Index Coding</button>
+    <p id="output"></p>
+    <script>
+        function performIndexCoding() {
+            let messages = { "A": 5, "B": 3, "C": 6 };
+            let sideInfo = { "A": ["B"], "B": ["C"], "C": ["A"] }; 
+             let encoded = {};
+            for (let receiver in messages) {
+                let encodedMsg = messages[receiver];
+                if (sideInfo[receiver]) {
+                    sideInfo[receiver].forEach(known => {
+                        encodedMsg ^= messages[known]; 
+                    });
+                }
+                encoded[receiver] = encodedMsg;
+            }
+            document.getElementById("output").innerText = JSON.stringify(encoded);
+        }
+    </script>
+</body>
+</html>
